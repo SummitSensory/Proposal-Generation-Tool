@@ -58,32 +58,27 @@ Next.js.
 5. Under **Settings → Environment Variables**, add:
    - `SESSION_SECRET` — a long random string. Generate one by running `openssl rand -base64 32`
      in any terminal (Mac/Linux), or ask Claude/ChatGPT to generate a random 32+ character string.
-6. Click **Deploy**. The first deploy will succeed but the app will have no database tables yet —
-   that's expected, next step fixes that.
+6. Add two more environment variables (Settings → Environment Variables):
+   - `SEED_OWNER_EMAIL` — the email you want to log in with
+   - `SEED_OWNER_PASSWORD` — a temporary password (you'll change it after first login)
+   - `SETUP_TOKEN` — any random string you make up (this just prevents a stranger from creating
+     an account before you do)
+7. Click **Deploy**. The database tables are created automatically as part of this build — no
+   separate step needed.
 
-## One-time setup: create the database tables and first login
+## One-time setup: create your first login (no terminal needed)
 
-You only need to do this once (and again any time you change the data model in `src/db/schema.ts`).
+Once your deploy finishes, visit this URL in your browser (replace with your real domain and the
+`SETUP_TOKEN` value you set above):
 
-1. On your computer, in the project folder, create a file named `.env.local` (copy `.env.example`
-   and rename it) and paste in the **production** `DATABASE_URL` from Vercel's dashboard
-   (Settings → Environment Variables → click the eye icon to reveal it, then copy it).
-2. Run:
-   ```
-   npm install
-   npm run db:push
-   ```
-   This creates all the tables in your live database.
-3. Set `SEED_OWNER_EMAIL` and `SEED_OWNER_PASSWORD` in the same `.env.local` to whatever you want
-   your first login to be, then run:
-   ```
-   npm run db:seed
-   ```
-   This creates your Owner login and two sample vendors. **Sign in and change the password
-   immediately** from the Account Settings page in the app — the seeded password is meant to be
-   temporary.
-4. Delete `.env.local` afterward (or at least remove the production `DATABASE_URL` from it) so you
-   don't accidentally run development commands against production data.
+```
+https://your-vercel-domain.vercel.app/api/setup?token=YOUR_SETUP_TOKEN
+```
+
+You'll see a plain text confirmation message. That's it — go to `/login` and sign in with
+`SEED_OWNER_EMAIL` / `SEED_OWNER_PASSWORD`, then **change your password immediately** from Account
+Settings. This link is safe to visit more than once — it only ever creates the owner account if no
+one has logged in yet.
 
 ## Local development (optional, for future changes)
 
