@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { projects, customers } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { createProposal } from "@/lib/actions/proposals";
+<<<<<<< HEAD
 import Link from "next/link";
 
 const SERIES_OPTIONS = [
@@ -11,6 +12,8 @@ const SERIES_OPTIONS = [
   { value: "scape", label: "Summit Scape" },
   { value: "safe", label: "Summit Safe" },
 ];
+=======
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
 
 export default async function NewProposalPage({
   searchParams,
@@ -26,12 +29,15 @@ export default async function NewProposalPage({
   return (
     <div className="max-w-lg">
       <h1 className="text-2xl font-semibold mb-6">New proposal</h1>
+<<<<<<< HEAD
       {rows.length === 0 && (
         <p className="mb-4 text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-3 py-2">
           You don&apos;t have any projects yet. <Link href="/projects/new" className="underline">Create a project</Link> first
           (which needs a customer — <Link href="/customers/new" className="underline">create one</Link> if you don&apos;t have any).
         </p>
       )}
+=======
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
       <form action={createProposal} className="bg-white rounded-lg border border-slate-200 p-6 space-y-4">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Project *</label>
@@ -42,6 +48,7 @@ export default async function NewProposalPage({
             ))}
           </select>
         </div>
+<<<<<<< HEAD
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Proposal type *</label>
           <div className="grid grid-cols-1 gap-2">
@@ -59,6 +66,8 @@ export default async function NewProposalPage({
             Determines which products are available when you build this proposal — you can't change it after creating the proposal.
           </p>
         </div>
+=======
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
         <div className="flex justify-end">
           <button type="submit" className="rounded-md bg-slate-900 text-white text-sm font-medium px-4 py-2 hover:bg-slate-800">
             Create draft proposal
