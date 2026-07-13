@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { proposals } from "@/db/schema";
 import { sql } from "drizzle-orm";
 
+<<<<<<< HEAD
 const SERIES_PREFIX: Record<string, string> = {
   adventure: "ADV",
   soar: "SOAR",
@@ -40,4 +41,14 @@ export async function generateProposalNumber(series: string | null, customerName
     .where(sql`to_char(${proposals.createdAt}, 'YYMMDD') = ${date}`);
   const next = Number(value) + 1;
   return `${prefix}-${initials(customerName)}-${date}-${String(next).padStart(3, "0")}`;
+=======
+export async function generateProposalNumber(): Promise<string> {
+  const year = new Date().getFullYear();
+  const [{ value }] = await db
+    .select({ value: sql<number>`count(*)` })
+    .from(proposals)
+    .where(sql`extract(year from ${proposals.createdAt}) = ${year}`);
+  const next = Number(value) + 1;
+  return `P-${year}-${String(next).padStart(4, "0")}`;
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
 }
