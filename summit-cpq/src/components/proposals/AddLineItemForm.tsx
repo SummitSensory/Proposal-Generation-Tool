@@ -7,7 +7,10 @@ type Product = {
   id: number;
   sku: string;
   name: string;
+<<<<<<< HEAD
   category: string | null;
+=======
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
   customerFacingName: string | null;
   unitPrice: string;
   dimensionFields: DimensionField[];
@@ -16,6 +19,7 @@ type Product = {
 export default function AddLineItemForm({
   action,
   products,
+<<<<<<< HEAD
   seriesLabel,
 }: {
   action: (formData: FormData) => void;
@@ -25,12 +29,21 @@ export default function AddLineItemForm({
   const [productId, setProductId] = useState<string>("");
   const [customMode, setCustomMode] = useState(false);
   const [query, setQuery] = useState("");
+=======
+}: {
+  action: (formData: FormData) => void;
+  products: Product[];
+}) {
+  const [productId, setProductId] = useState<string>("");
+  const [customMode, setCustomMode] = useState(false);
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
 
   const selectedProduct = useMemo(
     () => products.find((p) => String(p.id) === productId),
     [productId, products]
   );
 
+<<<<<<< HEAD
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return products;
@@ -50,6 +63,10 @@ export default function AddLineItemForm({
         </p>
       )}
 
+=======
+  return (
+    <form action={action} className="border-t border-slate-100 pt-4 space-y-3">
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
       <div className="flex items-center gap-3 text-sm">
         <label className="flex items-center gap-1">
           <input type="radio" checked={!customMode} onChange={() => setCustomMode(false)} /> From product catalog
@@ -63,6 +80,7 @@ export default function AddLineItemForm({
 
       {!customMode ? (
         <>
+<<<<<<< HEAD
           {selectedProduct ? (
             <div className="flex items-center justify-between rounded-md border border-slate-300 bg-slate-50 px-3 py-2 text-sm">
               <span>
@@ -107,6 +125,20 @@ export default function AddLineItemForm({
               <input type="hidden" name="productId" value={productId} required />
             </>
           )}
+=======
+          <select
+            name="productId"
+            value={productId}
+            onChange={(e) => setProductId(e.target.value)}
+            required={!customMode}
+            className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+          >
+            <option value="">Select a product...</option>
+            {products.map((p) => (
+              <option key={p.id} value={p.id}>{p.sku} — {p.name}</option>
+            ))}
+          </select>
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
 
           {selectedProduct && selectedProduct.dimensionFields?.length > 0 && (
             <div className="grid grid-cols-2 gap-3">
@@ -124,7 +156,10 @@ export default function AddLineItemForm({
               ))}
             </div>
           )}
+<<<<<<< HEAD
           {selectedProduct && <input type="hidden" name="productId" value={productId} />}
+=======
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
         </>
       ) : (
         <>
@@ -139,7 +174,11 @@ export default function AddLineItemForm({
           <input type="number" step="1" min="1" name="quantity" defaultValue="1" required className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm" />
         </div>
         <div className="flex justify-end">
+<<<<<<< HEAD
           <button type="submit" disabled={!customMode && !productId} className="rounded-md bg-slate-900 text-white text-sm font-medium px-4 py-2 hover:bg-slate-800 disabled:opacity-50">
+=======
+          <button type="submit" className="rounded-md bg-slate-900 text-white text-sm font-medium px-4 py-2 hover:bg-slate-800">
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
             Add line item
           </button>
         </div>
