@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { db } from "@/db";
+<<<<<<< HEAD
 import { products, vendors } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
@@ -37,11 +38,21 @@ export default async function ProductsPage({
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
+=======
+import { products } from "@/db/schema";
+
+export default async function ProductsPage() {
+  const all = await db.select().from(products);
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
         <h1 className="text-2xl font-semibold">Products</h1>
         <Link href="/products/new" className="rounded-md bg-slate-900 text-white text-sm font-medium px-4 py-2 hover:bg-slate-800">
           + New product
         </Link>
       </div>
+<<<<<<< HEAD
 
       {missingVendorCount > 0 && (
         <p className="mb-4 text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-3 py-2">
@@ -71,26 +82,37 @@ export default async function ProductsPage({
         })}
       </div>
 
+=======
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
       <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
         <table className="w-full text-sm">
           <thead className="bg-slate-50 text-slate-500 text-left">
             <tr>
               <th className="px-4 py-2 font-medium">SKU</th>
               <th className="px-4 py-2 font-medium">Name</th>
+<<<<<<< HEAD
               <th className="px-4 py-2 font-medium">Series</th>
               <th className="px-4 py-2 font-medium">Category</th>
               <th className="px-4 py-2 font-medium">Vendor</th>
+=======
+              <th className="px-4 py-2 font-medium">Category</th>
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
               <th className="px-4 py-2 font-medium">Price</th>
               <th className="px-4 py-2 font-medium">Status</th>
             </tr>
           </thead>
           <tbody>
+<<<<<<< HEAD
             {filtered.map((p) => (
+=======
+            {all.map((p) => (
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
               <tr key={p.id} className="border-t border-slate-100 hover:bg-slate-50">
                 <td className="px-4 py-2 font-mono text-xs text-slate-600">{p.sku}</td>
                 <td className="px-4 py-2">
                   <Link href={`/products/${p.id}`} className="font-medium text-slate-900 hover:underline">{p.name}</Link>
                 </td>
+<<<<<<< HEAD
                 <td className="px-4 py-2 text-slate-600">{SERIES_LABELS[p.series] || p.series}</td>
                 <td className="px-4 py-2 text-slate-600">{p.category || "—"}</td>
                 <td className="px-4 py-2">
@@ -100,11 +122,18 @@ export default async function ProductsPage({
                     <span className="text-amber-700 bg-amber-50 rounded-full px-2 py-0.5 text-xs">Needs vendor</span>
                   )}
                 </td>
+=======
+                <td className="px-4 py-2 text-slate-600">{p.category || "—"}</td>
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
                 <td className="px-4 py-2 text-slate-600">${Number(p.unitPrice).toFixed(2)}</td>
                 <td className="px-4 py-2 text-slate-600">{p.active ? "Active" : "Inactive"}</td>
               </tr>
             ))}
+<<<<<<< HEAD
             {filtered.length === 0 && <tr><td colSpan={7} className="px-4 py-6 text-center text-slate-400">No products yet.</td></tr>}
+=======
+            {all.length === 0 && <tr><td colSpan={5} className="px-4 py-6 text-center text-slate-400">No products yet.</td></tr>}
+>>>>>>> 0d4db38f0e95434716364cff81d3442876d0adb0
           </tbody>
         </table>
       </div>
